@@ -37,10 +37,12 @@ export const initialState: State = {
 export function reducer(state: State = initialState, action: Action) {
     switch (action.type) {
         case ActionTypes.UPDATE_ATTRIBUTE: {
-            const attribute = action.payload.attribute;
+            const { attribute } = action.payload;
+
             return {
                 ...state,
-                attributes: [...state.attributes.filter(x => x.name !== attribute.name), attribute]
+                attributes: state.attributes
+                    .map(attr => attr.name === attribute.name ? { ...attr, value: attribute.value } : attr)
             };
         }
         default:
