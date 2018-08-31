@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
     updateAttribute: bindActionCreators(updateAttribute, dispatch)
 });
 
-export default connect<any, any, any>(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(AttributeSectionComponent)

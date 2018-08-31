@@ -2,10 +2,9 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import logger from "redux-logger";
 
-import { rootReducer, State } from "../reducers";
-import { Action } from "../actions";
+import { rootReducer } from "../reducers";
 
-const store = createStore<State, Action, any, any>(rootReducer, composeWithDevTools(
+const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(logger)
 ));
 
