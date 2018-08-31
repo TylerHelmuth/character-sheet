@@ -1,5 +1,5 @@
-import { IAction } from "../actions";
 import { Attribute } from "../models";
+import { ActionTypes, Action } from "../actions";
 
 export interface State {
     attributes: Attribute[]
@@ -34,8 +34,15 @@ export const initialState: State = {
     ]
 }
 
-export function reducer(state: State = initialState, action: IAction) {
+export function reducer(state: State = initialState, action: Action) {
     switch (action.type) {
+        case ActionTypes.UPDATE_ATTRIBUTE: {
+            const attribute = action.payload.attribute;
+            return {
+                ...state,
+                attributes: [...state.attributes.filter(x => x.name !== attribute.name), attribute]
+            };
+        }
         default:
             return state;
     }
