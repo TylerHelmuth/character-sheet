@@ -13,6 +13,8 @@ interface State {
 }
 
 export class AttributeSectionComponent extends React.Component<Props, State> {
+    private readonly attrOrder = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
+
     constructor(props: Props) {
         super(props);
     }
@@ -20,11 +22,7 @@ export class AttributeSectionComponent extends React.Component<Props, State> {
     public render() {
         const attributes = this.props.attributes;
         
-        attributes.sort((a, b) => {
-            const order = ['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma'];
-
-            return order.indexOf(a.name) - order.indexOf(b.name);
-        });
+        attributes.sort((a, b) => this.attrOrder.indexOf(a.name) - this.attrOrder.indexOf(b.name));
 
         return <Row type="flex" justify="space-between" align="middle" gutter={16}>
             {attributes.map(attribute => (

@@ -7,7 +7,7 @@ interface Props {
     value: string;
     modifier: string;
 
-    onSave: (payload: Attribute) => void; 
+    onSave: (payload: Attribute) => void;
 }
 
 interface State {
@@ -33,25 +33,23 @@ export class AttributeComponent extends React.Component<Props, State> {
         return <Col span={4} key={name} style={attributeStyles}>
             <small >{name.toUpperCase()}</small>
             <h1 className="m-1">{modifier}</h1>
-            <input
-                className="m-1"
+            <input className="m-1"
                 style={inputStyles} value={value}
                 onChange={this.handleChange}
-                onBlur={this.handleBlur}
-            />
+                onBlur={this.handleBlur} />
         </Col>
     }
 
-    private handleChange(e: any) {
+    private handleChange(e: React.FormEvent<HTMLInputElement>) {
         this.setState({
-            value: e.target.value
+            value: e.currentTarget.value
         })
     }
 
-    private handleBlur(e: any) {
+    private handleBlur(e: React.FormEvent<HTMLInputElement>) {
         this.props.onSave({
             name: this.props.name,
-            value: e.target.value
+            value: +e.currentTarget.value
         });
     }
 }
